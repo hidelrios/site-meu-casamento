@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Presença</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #f8f5f0;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+
+    .container {
+        background: #ffffff;
+        padding: 30px 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 450px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 18px;
+        color: #6b4226;
+    }
+
+    form {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    form p {
+        text-align: left;
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1c7c1;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-top: 6px;
+        box-sizing: border-box; /* <-- garante que padding não estoure a largura */ }
+
+    button {
+        margin-top: 20px;
+        background: #a47e5b;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    button:hover {
+        background: #8c6a4b;
+    }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #7a6a58;
+    }
+
+    /* Responsividade */
+    @media (max-width: 480px) {
+        .container {
+            padding: 20px 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        input, select, textarea {
+            font-size: 13px;
+            padding: 8px 10px;
+        }
+
+        button {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <div class="container">
+        <h2>Confirme sua presença</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Confirmar</button>
+        </form>
+        <div class="footer">
+            <p>Estamos ansiosos para celebrar com você!</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Presentes</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #f8f5f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #6b4226;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        li {
+            background: #faf8f6;
+            border: 1px solid #e4d7cc;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+            text-align: center;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+        }
+
+        .present-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: #5a3822;
+        }
+
+        .present-description {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .present-link {
+            font-size: 14px;
+            word-break: break-word;
+            color: #7b5a3e;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .reserved {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: #c79a72;
+            color: #fff;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #a47e5b;
+        }
+
+        .btn-disabled {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: #ccc;
+            color: #666;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Presentes</h2>
+        <ul>
+        {% for p in presentes %}
+            <li>
+                <div class="present-name">{{ p.nome }}</div>
+                <div class="present-description">{{ p.descricao }}</div>
+                <div class="present-link">
+                    <a href="{{ p.link }}" target="_blank">Ver link do presente</a>
+                </div>
+                {% if p.reservado %}
+                    <span class="btn-disabled">Já escolhido</span>
+                    <p class="reserved">Reservado por {{ p.reservado_por }}</p>
+                {% else %}
+                    <a class="btn" href="{% url 'reservar_presente' p.id %}">Escolher este presente</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
