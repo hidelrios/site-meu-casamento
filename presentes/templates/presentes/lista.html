@@ -115,9 +115,14 @@
             <li>
                 <div class="present-name">{{ p.nome }}</div>
                 <div class="present-description">{{ p.descricao }}</div>
-                <div class="present-link">
-                    <a href="{{ p.link }}" target="_blank">Ver link do presente</a>
-                </div>
+                {% if p.link %}
+                    <div class="present-link">
+                        <a href="{{ p.link|urlize }}" target="_blank" rel="noopener noreferrer">
+                            Ver link do presente
+                        </a>
+                    </div>
+                {% endif %}
+
                 {% if p.reservado %}
                     <span class="btn-disabled">Já escolhido</span>
                     <p class="reserved">Reservado por {{ p.reservado_por }}</p>
